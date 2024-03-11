@@ -1,4 +1,4 @@
-def hamming_decode(msg: str) -> str:
+def hamming_decode(msg: str) -> str:    #TODO : Utiliser un type bytes/binary au lieu de string
     """
     Décode un message encodé avec le code de Hamming, corrige les erreurs et retire les bits de redondance
     :param msg: Message encodé avec le code de Hamming
@@ -52,8 +52,18 @@ def hamming_decode(msg: str) -> str:
 
     return result
 
+def hamming_encode(msg: str) -> str:    #TODO : Utiliser un type bytes/binary au lieu de string
+    """
+    Encode un message avec le code de Hamming
+    :param msg: Message à encoder
+    :return: Message encodé avec le code de Hamming
+    """
+    result = ""
+    for i in range(0, len(msg), 4):
+        buffer = msg[i:i + 4]
+        result += buffer
+        result += str(int(buffer[0]) ^ int(buffer[1]) ^ int(buffer[2]))
+        result += str(int(buffer[0]) ^ int(buffer[1]) ^ int(buffer[3]))
+        result += str(int(buffer[1]) ^ int(buffer[2]) ^ int(buffer[3]))
 
-if __name__ == "__main__":
-    with open("message.txt", "r") as file:
-        msg = file.read()
-        print(hamming_decode(msg))
+    return result
