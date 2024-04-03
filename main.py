@@ -1,6 +1,8 @@
 from hamming import *
 from vigenere import *
 from vernam import *
+from huffman import *
+from pickle import *
 
 if __name__ == "__main__":
     with open("message.txt", "r") as file:
@@ -42,9 +44,12 @@ if __name__ == "__main__":
 
         print(f"Message ASCII vernam : {vernamMessage}")
         print(f"Clé vernam : {vernamKey}")
-        vernamMessage = vernam_decode(vernamMessage, vernamKey)
 
-        with open("Etape6 - message ASCII vernam decode.txt", "w") as file:
-            file.write(vernamMessage)
+        huffmanMessage, huffmanTree = huffman_encoding(vernamMessage)
+        with open("Etape6 - message vernam compresse avec huffman.txt", "w") as file:
+            file.write(huffmanMessage)
 
-        print(f"Message ASCII vernam décodé : {vernamMessage}")
+        with open("Etape6 - arbre huffman", "wb") as file:
+            dump(huffmanTree, file)
+
+        print(f"Message vernam après décompression : {huffman_decoding(huffmanMessage, huffmanTree)}")
