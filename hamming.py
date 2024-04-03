@@ -1,4 +1,4 @@
-def hamming_decode(msg: str) -> str:    #TODO : Utiliser un type bytes/binary au lieu de string
+def hamming_decode(msg: str) -> str:  # TODO : Utiliser un type bytes/binary au lieu de string
     """
     Décode un message encodé avec le code de Hamming, corrige les erreurs et retire les bits de redondance
     :param msg: Message encodé avec le code de Hamming
@@ -52,7 +52,8 @@ def hamming_decode(msg: str) -> str:    #TODO : Utiliser un type bytes/binary au
 
     return result
 
-def hamming_encode(msg: str) -> str:    #TODO : Utiliser un type bytes/binary au lieu de string
+
+def hamming_encode(msg: str) -> str:  # TODO : Utiliser un type bytes/binary au lieu de string
     """
     Encode un message avec le code de Hamming
     :param msg: Message à encoder

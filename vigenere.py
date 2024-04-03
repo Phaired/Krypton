@@ -21,6 +21,7 @@ def vigenere_encode(msg: str, key: str) -> str:
             keyIndex = (keyIndex + 1) % len(key)
     return result
 
+
 def vigenere_decode(msg: str, key: str) -> str:
     """
     Décode un message avec le chiffrement de Vigenère
