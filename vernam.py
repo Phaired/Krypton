@@ -1,5 +1,6 @@
 from random import random
 
+alphabet = "abcdefghijklmnopqrstuvwxyz, 0123456789"
 
 def vernam_encode(msg: str) -> (str, str):
     """
@@ -9,9 +10,8 @@ def vernam_encode(msg: str) -> (str, str):
     """
 
     key = ""
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
     for i in range(len(msg)):
-        key += alphabet[int(random() * 26)]
+        key += alphabet[int(random() * len(alphabet))]
 
     result = ""
     for i in range(len(msg)):
@@ -20,9 +20,9 @@ def vernam_encode(msg: str) -> (str, str):
 
         if indexCharMsg != -1 and indexCharKey != -1:
             if msg[i].isupper():
-                result += alphabet[(indexCharMsg + indexCharKey) % 26].upper()
+                result += alphabet[(indexCharMsg + indexCharKey) % len(alphabet)].upper()
             else:
-                result += alphabet[(indexCharMsg + indexCharKey) % 26]
+                result += alphabet[(indexCharMsg + indexCharKey) % len(alphabet)]
         else:
             # char non trouvé dans l'alphabet donc on le laisse tel quel
             result += msg[i]
@@ -37,7 +37,6 @@ def vernam_decode(msg: str, key: str) -> str:
     :param key: Clé de chiffrement
     :return: Message décodé avec le chiffrement de Vernam
     """
-    alphabet = "abcdefghijklmnopqrstuvwxyz"
     result = ""
     for i in range(len(msg)):
         indexCharMsg = alphabet.find(msg[i].lower())
@@ -45,9 +44,9 @@ def vernam_decode(msg: str, key: str) -> str:
 
         if indexCharMsg != -1 and indexCharKey != -1:
             if msg[i].isupper():
-                result += alphabet[(indexCharMsg - indexCharKey) % 26].upper()
+                result += alphabet[(indexCharMsg - indexCharKey) % len(alphabet)].upper()
             else:
-                result += alphabet[(indexCharMsg - indexCharKey) % 26]
+                result += alphabet[(indexCharMsg - indexCharKey) % len(alphabet)]
         else:
             # char non trouvé dans l'alphabet donc on le laisse tel quel
             result += msg[i]

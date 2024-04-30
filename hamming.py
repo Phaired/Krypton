@@ -19,6 +19,7 @@ def hamming_decode(msg: str) -> str:  # TODO : Utiliser un type bytes/binary au 
         ]
 
         if redondance != computedRedondance:
+            # Calcul de la position de l'erreur
             redondanceDistance = [
                 redondance[0] == computedRedondance[0],
                 redondance[1] == computedRedondance[1],
@@ -36,17 +37,10 @@ def hamming_decode(msg: str) -> str:  # TODO : Utiliser un type bytes/binary au 
                 case [True, False, False]:
                     errorIndex = 3
 
-            print(f"Erreur détectée à l'indice {i}")
-            print(f"Redondance attendue : {redondance}, redondance calculée : {computedRedondance}")
-            print(f"Verification de la redondance : {redondanceDistance}")
-            print(f"Indice de l'erreur : {errorIndex}")
-
             # Correction de l'erreur
-            print(f"Message erroné : {buffer}")
             buffer = list(buffer)
             buffer[errorIndex] = str(int(buffer[errorIndex]) ^ 1)
             buffer = "".join(buffer)
-            print(f"Message corrigé : {buffer}")
 
         result += buffer
 

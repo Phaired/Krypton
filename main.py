@@ -52,4 +52,11 @@ if __name__ == "__main__":
         with open("Etape6 - arbre huffman", "wb") as file:
             dump(huffmanTree, file)
 
+        print(f"Message vernam compressé : {huffmanMessage}")
+        print(f"Arbre huffman : {dumps(huffmanTree)}")
+        print(f"| Taille message initial | Taille message compressé + arbre | Taux de compression |")
+        print(f"| {len(vernamMessage)*8} bits             | {len(huffmanMessage) + len(dumps(huffmanTree))} bits                       | {(1 - (len(huffmanMessage) + len(dumps(huffmanTree))) / (len(vernamMessage)*8))*100}% |")
+        print(f"{len(huffmanMessage)} bits")
+        print(f"{len(dumps(huffmanTree))} bits")
         print(f"Message vernam après décompression : {huffman_decoding(huffmanMessage, huffmanTree)}")
+        print(f"Message vernam décodé : {vernam_decode(huffman_decoding(huffmanMessage, huffmanTree), vernamKey)}")
